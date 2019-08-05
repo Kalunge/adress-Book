@@ -62,34 +62,47 @@ Contact.prototype.fullName = function(){
   return this.firstName + ' ' + this.lastName;
 };
 
-let highSchoolAdressBook = new Adressbook();
+//USER-INTERFACE LOGIC
+//dont be in the habit of using global var
+let adressBook = new Adressbook();
 
-let kalumaGeorge = new Contact('George', 'Kaluma', '0713398918');
-
-highSchoolAdressBook.addContact(kalumaGeorge);
-
-let thaicu = new Contact('Wilson', 'Thuranira', '0715557552');
-
-highSchoolAdressBook.addContact(thaicu);
-
-let kumbuka = new Contact('JOhn', 'Mwirig', '07153264581');
-highSchoolAdressBook.addContact(kumbuka);
+//Displaying Contacts on our Page
+// this will display info in the DOM
+//separating it from the block of Code is a best practise
+//will link this to the ul list
 
 
-let familyAdressBook = new Adressbook();
-let mySister = new Contact('Alice', 'Kaari', '0726436504');
-familyAdressBook.addContact(mySister);
+function displayContactDetails(adressBookToDisplay){
+  let contactList = $("ul#contacts");
+  let htmlForContactInfo = "";
+  adressBookToDisplay.contacts.forEach(function(contact){
+    htmlForContactInfo += "<li id=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
+  });
+    contactList.html(htmlForContactInfo);
+  }
 
-let friendsAdressBook = new Adressbook();
-let eduMutugi = new Contact('Edwin', 'Mutugi', '0718104889');
-friendsAdressBook.addContact(eduMutugi);
+// open a jquery.ready function
 
+$(document).ready(function(){
+  // add a form submission with event listener
+  $("form#new-contact").submit(function (event) { 
+    event.preventDefault();
 
-let myMother = new Contact('Grace', 'Acibi', '0706236177');
-let faithMuthoni = new Contact('Faith', 'Muthoni', '0713266564');
-let myDad = new Contact('Joseph', 'Kalunge', '0714487730');
+    //gather user input from form fields and assign them variables
+    let inputtedFirstName = $("input#new-first-name").val();
+    let inputtedLastName = $("input#new-last-name").val();
+    let inputtedPhonNUmber = $("input#new-phone-number").val();
+    
+    // create a new contact object pass in the gathered info
+    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhonNUmber);
+    
+    // add newContact to the adress book
+    adressBook.addContact(newContact);
 
-familyAdressBook.addContact(myMother);
-familyAdressBook.addContact(myDad);
-familyAdressBook.addContact(faithMuthoni);
+    // log the list of our contacts in the adressbook to the console
+    // console.log(adressBook.contacts);
+    displayContactDetails(adressBook);
 
+  });
+
+});

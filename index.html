@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/jquery-3.4.1.js"></script>
   <script src="js/scripts.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>adressBook</title>
+  <title>Adress Book</title>
 </head>
 <body>
-  <h1>Adress Book for storing contacts</h1>
+  <div class="container">
+    <h1>Adress Book</h1>
+    <h2>add a contact</h2>
+    
+    <!--add a for for adding contacts with the relevant fields-->
+    
+    <form id="new-contact">
+      <label for="new-first-name">First Name</label>
+      <input type="text" id="new-first-name">
+      <label for="new-last-name">Last Name</label>
+      <input type="text" id="new-last-name">
+      <label for="new-phone-number">PhoneNumber</label>
+      <input type="text" id="new-phone-number">
+      <button type="submit">Add</button>
+    </form>
+
+
+    <h2>contacts:</h2>
+
+    <!--add a ul with the id contacs where the contacts wil be populated by jQuery-->
+
+    <ul id="contacts">
+
+    </ul>
+
+    <!--a show-contact div that will display selected contacts-->
+    <div id="show-contact">
+      <p>first Name <span class="first-name"></span></p>
+      <p>last Name <span class="last-name"></span></p>
+      <p>phone Number <span class="phone-number"></span></p>
+      <div id="buttons">
+
+      </div>
+
+    </div>  
+
+  </div>
 </body>
 </html>
